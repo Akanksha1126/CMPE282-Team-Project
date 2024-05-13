@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CMPE282 - App1</title>
+	<style>
+		body{
+			background-color: #013368;
+			color: white;
+		}
+		.center {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+		}
+		img{
+			width: 100%;
+		}
+		.maintext {
+			display: inline-block;
+			font-size: 3em;
+			margin-top: 20px;
+		}
+		a{
+			display: inline-block;
+			margin-top: 20px;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="center">
+		<div style="width: 500px;">
+			<img src="https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1">
+			<div class="maintext">CMPE282 Simple Client<br>Web Application</div>
+			<div style="margin-top: 30px;">
+				<div id="label">Employee: Loading...</div>
+			</div>
+			<a href="/app1/logout">Logout</a>
+		</div>
+	</div>
+</body>
+<script>
+	fetch('http://cmpe282-198369391.us-west-1.elb.amazonaws.com/api/employee/get/{{user.username}}',{
+			'mode': 'cors',
+			'credentials': 'include',
+	})
+	.then(data => data.json())
+	.then(data => {
+			const employee = data.employee;
+			console.log(employee);
+			document.getElementById('label').innerHTML = `Employee: ${employee.first_name} ${employee.last_name} (${employee.emp_no})`
+			// document.getElementById('employee_position').innerHTML = `Position: ${employee.titles[0]?.title}`
+			// document.getElementById('employee_department').innerHTML = `Department: ${employee.departments[0]?.department.dept_name}`
+			// document.getElementById('employee_id').innerHTML = `Employee ID: ${employee.emp_no}`
+	})
+</script>
+</html>

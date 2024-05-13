@@ -1,0 +1,16 @@
+
+
+mysql -u admin -p'7bc90o2yp6' -h database-1.cw9j2fomzlqo.us-west-1.rds.amazonaws.com -P 3306
+
+CREATE DATABASE IF NOT EXISTS employees;
+USE employees;
+CREATE USER 'backend'@'%' IDENTIFIED BY '7bc90o2yp6';
+GRANT ALL PRIVILEGES ON employees.* TO 'backend'@'%';
+FLUSH PRIVILEGES;
+
+mysql -u admin -p'7bc90o2yp6' -h database-1.cw9j2fomzlqo.us-west-1.rds.amazonaws.com -P 3306 < employees.sql
+
+mysql -u admin -p'7bc90o2yp6' -h database-1.cw9j2fomzlqo.us-west-1.rds.amazonaws.com -P 3306 < test_employees_md5.sql
+
+root
+pI4lPT24k8pM
